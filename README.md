@@ -1,21 +1,12 @@
-<<<<<<< HEAD
-# amaurifinanceiro
+<h1  align="center">         Projeto Amauri Financeiro <h1>
+  
+<p align="center"> 
+  
+ <img src= https://user-images.githubusercontent.com/94265037/154793231-ba96e58b-7869-4e19-9ce8-95ec68c15d70.png />
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# AmauriFinanceiro
-Repositório do projeto AmauriFinanceiro
->>>>>>> 9abba4270a62590b74072842c4305966d5b336e6
+  
+  
+ </p>
+  
+- Dart
+- Flutter 2.11.0
