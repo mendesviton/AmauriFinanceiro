@@ -36,6 +36,7 @@ dependencies:
   flutter_launcher_icons: ^0.9.1 
 
   flutter_native_splash: ^1.2.0
+  flutter_blurhash: ^0.6.4
   
   
    
@@ -67,7 +68,7 @@ flutter_icons:
   adaptative_icon_foreground: "assets/amauri.png" 
 
 flutter_native_splash:
-  color: "#3F51B5"
+  color: "#6575ca"
   image: "assets/amauri.png"
   android: true
   ios: true

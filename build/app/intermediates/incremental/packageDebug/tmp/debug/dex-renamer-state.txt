@@ -1,4 +1,4 @@
-#Sat Feb 19 04:22:56 BRT 2022
+#Sun Feb 20 03:36:50 BRT 2022
 base.0=D\:\\Dev\\Amauri_Financeiro\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
