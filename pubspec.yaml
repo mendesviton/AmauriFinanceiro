@@ -37,6 +37,8 @@ dependencies:
 
   flutter_native_splash: ^1.2.0
   flutter_blurhash: ^0.6.4
+  string_validator: ^0.3.0
+  sqflite: ^2.0.2
   
   
    
@@ -118,5 +120,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
   assets:
      - assets/amauri.png
+     - assets/imageprincipal.png
   
   

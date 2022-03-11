@@ -11,6 +11,6 @@ class MyApp extends StatelessWidget {
         title: 'Amauri Financeiro',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.amber),
-        home: LoginPage());
+        home: Login());
   }
 }
