@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\Dev\\Amauri_Financeiro\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
+            "outputFile": "D:\\Dev\\Amauri_financeiro FLUTTER\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values\\values.xml",
             "map": [
                 {
                     "source": "C:\\Users\\vitor\\.gradle\\caches\\transforms-2\\files-2.1\\122df2e57d294d1a53db26bbc3b813c1\\core-1.6.0\\res\\values\\values.xml",
@@ -23,7 +23,7 @@
                     }
                 },
                 {
-                    "source": "D:\\Dev\\Amauri_Financeiro\\android\\app\\src\\main\\res\\values\\styles.xml",
+                    "source": "D:\\Dev\\Amauri_financeiro FLUTTER\\android\\app\\src\\main\\res\\values\\styles.xml",
                     "from": {
                         "startLines": "3,15",
                         "startColumns": "4,4",

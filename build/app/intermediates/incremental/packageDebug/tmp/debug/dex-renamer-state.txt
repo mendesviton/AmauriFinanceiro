@@ -1,4 +1,4 @@
-#Fri Mar 11 02:47:25 BRT 2022
-base.0=D\:\\Dev\\Amauri_Financeiro\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+#Sat May 07 02:40:46 BRT 2022
+base.0=D\:\\Dev\\Amauri_financeiro FLUTTER\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

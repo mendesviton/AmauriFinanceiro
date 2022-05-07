@@ -1,14 +1,18 @@
-import 'dart:ffi';
-
+import 'package:amaurifinanceiro/controler/controle_cadastro.dart';
 import 'package:amaurifinanceiro/controler/validador.dart';
+import 'package:amaurifinanceiro/database/object_dao.dart';
 import 'package:amaurifinanceiro/pages/cadastro/email_cad.dart';
 import 'package:amaurifinanceiro/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:amaurifinanceiro/database/object_dao.dart';
 
 class Nome_cad extends StatefulWidget {
+  final controle_cadastro ctrl;
+  Nome_cad(this.ctrl);
+
   @override
   _nomecadastro createState() => _nomecadastro();
 }
@@ -23,7 +27,7 @@ class _nomecadastro extends State<Nome_cad> {
   bool _invalidname = true;
   bool _fieldsnull = true;
 
-  TextEditingController Ctrl = TextEditingController();
+  TextEditingController NomeControler = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +52,7 @@ class _nomecadastro extends State<Nome_cad> {
                 height: 125,
               ),
               TextFormField(
+                
                   validator: (value) {
                     if (_fieldsnull || _invalidname) {
                       return '';
@@ -58,8 +63,8 @@ class _nomecadastro extends State<Nome_cad> {
                   onChanged: (value) {
                     // _numerodigitado
                     setState(() {
-                      _invalidname = valida.pNomeInvalido(Ctrl.text);
-                      _fieldsnull = valida.pCampoVazio(Ctrl.text);
+                      _invalidname = valida.pNomeInvalido(NomeControler.text);
+                      _fieldsnull = valida.pCampoVazio(NomeControler.text);
                     });
                   },
                   style: TextStyle(
@@ -85,10 +90,9 @@ class _nomecadastro extends State<Nome_cad> {
                     //     size: 18,
                     // ), // myIcon is a 48px-wide widget.
                   ),
-                  controller: Ctrl),
+                  controller: NomeControler),
               Column(children: <Widget>[
                 Container(
-                  
                   height: 280,
                   alignment: Alignment.centerRight,
                   child: ListView(
@@ -193,11 +197,13 @@ class _nomecadastro extends State<Nome_cad> {
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                             widget.ctrl.setNome(NomeControler.text);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Email_cad()),
+                                  builder: (context) => Email_cad(widget.ctrl)),
                             );
+                           
                           } else {
                             // nao pode entrar
                           }

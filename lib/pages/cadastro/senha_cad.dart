@@ -1,4 +1,5 @@
 import 'package:amaurifinanceiro/carregamento.dart';
+import 'package:amaurifinanceiro/controler/controle_cadastro.dart';
 import 'package:amaurifinanceiro/controler/validador.dart';
 import 'package:amaurifinanceiro/pages/cadastro/email_cad.dart';
 import 'package:amaurifinanceiro/util.dart';
@@ -8,6 +9,9 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 class Senha_cad extends StatefulWidget {
+  final controle_cadastro ctrl;
+
+  Senha_cad(this.ctrl);
   @override
   _senhacadastro createState() => _senhacadastro();
 }
@@ -21,7 +25,7 @@ class _senhacadastro extends State<Senha_cad> {
   final _formKey = GlobalKey<FormState>();
 
   ValidaCampos valida = ValidaCampos();
-  TextEditingController Ctrl = TextEditingController();
+  TextEditingController ControleSenha = TextEditingController();
   void initstate() {
     super.initState();
   }
@@ -62,11 +66,12 @@ class _senhacadastro extends State<Senha_cad> {
                             return '';
                           }
                         },
-                        controller: Ctrl,
+                        controller: ControleSenha,
                         onChanged: (value) {
                           setState(() {
-                            Senha = Ctrl.text;
-                            _fieldsnull = valida.pCampoVazio(Ctrl.text);
+                            Senha = ControleSenha.text;
+                            _fieldsnull =
+                                valida.pCampoVazio(ControleSenha.text);
                           });
                         },
                         obscureText: _versenha,
@@ -231,10 +236,14 @@ class _senhacadastro extends State<Senha_cad> {
                                     // MaterialPageRoute(
                                     // builder: (context) => Email_cad()),
                                     // );
+                                    widget.ctrl.setCodigo(250);
+                                    widget.ctrl.setSenha(ControleSenha.text);
+                                    widget.ctrl.SaveCadAmauri();
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                          builder: (context) => SplashScreen(),
+                                          builder: (context) => SplashScreen(
+                                              widget.ctrl.GetNomeUsuario(21)),
                                         ));
                                   } else {
                                     // nao pode entrar

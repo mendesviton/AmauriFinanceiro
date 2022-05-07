@@ -1,5 +1,4 @@
-import 'dart:ffi';
-
+import 'package:amaurifinanceiro/controler/controle_cadastro.dart';
 import 'package:amaurifinanceiro/controler/validador.dart';
 import 'package:amaurifinanceiro/pages/cadastro/senha_cad.dart';
 import 'package:amaurifinanceiro/util.dart';
@@ -9,6 +8,10 @@ import 'package:flutter/painting.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 
 class Email_cad extends StatefulWidget {
+  final controle_cadastro ctrl;
+
+  Email_cad(this.ctrl);
+
   @override
   _nomecadastro createState() => _nomecadastro();
 }
@@ -24,7 +27,7 @@ class _nomecadastro extends State<Email_cad> {
   bool _validemail = false;
   bool _fieldsnull = true;
 
-  TextEditingController Ctrl = TextEditingController();
+  TextEditingController ControleEmail = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +67,8 @@ class _nomecadastro extends State<Email_cad> {
                   onChanged: (value) {
                     // _numerodigitado
                     setState(() {
-                      _validemail = valida.pEmailValido(Ctrl.text);
-                      _fieldsnull = valida.pCampoVazio(Ctrl.text);
+                      _validemail = valida.pEmailValido(ControleEmail.text);
+                      _fieldsnull = valida.pCampoVazio(ControleEmail.text);
                     });
                   },
                   decoration: InputDecoration(
@@ -84,7 +87,7 @@ class _nomecadastro extends State<Email_cad> {
                     // size: 18,
                     // ), // myIcon is a 48px-wide widget.
                   ),
-                  controller: Ctrl),
+                  controller: ControleEmail),
               Column(children: <Widget>[
                 Container(
                   height: 280,
@@ -192,10 +195,12 @@ class _nomecadastro extends State<Email_cad> {
                     ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
+                            widget.ctrl.setEmail(ControleEmail.text);
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Senha_cad()));
+                                    builder: (context) =>
+                                        Senha_cad(widget.ctrl)));
                           } else {
                             ut.Message(
                                 context,

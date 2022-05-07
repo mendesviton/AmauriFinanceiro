@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:amaurifinanceiro/util.dart';
 import 'package:flutter/material.dart';
 import 'pages/login_page.dart';

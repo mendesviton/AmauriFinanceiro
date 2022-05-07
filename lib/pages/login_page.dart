@@ -1,12 +1,17 @@
 import 'dart:async';
+import 'dart:math';
 
+import 'package:amaurifinanceiro/controler/controle_cadastro.dart';
 import 'package:amaurifinanceiro/controler/validador.dart';
+import 'package:amaurifinanceiro/database/object_dao.dart';
 import 'package:amaurifinanceiro/pages/cadastro/cadastro.dart';
 import 'package:amaurifinanceiro/pages/cadastro/nome_cad.dart';
 import 'package:amaurifinanceiro/pages/staticpage.dart';
 import 'package:amaurifinanceiro/util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:string_validator/string_validator.dart';
 
 //import 'package:gradient_textfield/gradient_textfield.dart';
 
@@ -15,28 +20,31 @@ class Login extends StatefulWidget {
   _LoginPage createState() => _LoginPage();
 }
 
-void Printa() {
-  print('object');
-}
-
 class _LoginPage extends State<Login> {
+  DBdao dao = DBdao();
   Timer? timer;
   late String wMsg;
+
+  @override
   void initstate() {
     super.initState(); //initstate() = oncreate() do delphi
   }
 
   @override
+  // Datamodule dm = Datamodule();
+  TextEditingController EmailControler = TextEditingController();
+  TextEditingController SenhaControler = TextEditingController();
+  String email = '';
   ValidaCampos ctrl = ValidaCampos();
   cadastro cad = cadastro();
   Util ut = new Util();
   bool _showPassword = false;
   final _formKey = GlobalKey<FormState>();
+  Usuario finaluser = Usuario();
+  controle_cadastro CadatroControler = controle_cadastro();
 
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    TextEditingController email = TextEditingController();
-    TextEditingController Senha = TextEditingController();
     return Scaffold(
         body: SingleChildScrollView(
             child: Container(
@@ -71,38 +79,41 @@ class _LoginPage extends State<Login> {
                           key: _formKey,
                           child: ListView(shrinkWrap: true, children: <Widget>[
                             TextFormField(
-                                validator: (value) {
-                                  if (value == null || value.isEmpty) {
-                                    return 'Digite um Login válido';
-                                  }
-                                  return null;
-                                },
-                                keyboardType: TextInputType.name,
-                                decoration: InputDecoration(
-                                    icon: Icon(IconData(0xe043,
-                                        fontFamily: 'MaterialIcons')),
-                                    hintText: 'E-mail',
-                                    hintStyle: TextStyle(color: Colors.black12),
-                                    // labelText: "LOGIN",
-                                    labelStyle: TextStyle(
-                                      color: Colors.amber.shade300,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                    )),
-                                style: TextStyle(
-                                    fontSize: 15,
+                              controller: EmailControler,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Digite um Login válido';
+                                }
+                                return null;
+                              },
+                              keyboardType: TextInputType.name,
+                              decoration: InputDecoration(
+                                  icon: Icon(IconData(0xe043,
+                                      fontFamily: 'MaterialIcons')),
+                                  hintText: 'E-mail',
+                                  hintStyle: TextStyle(color: Colors.black12),
+                                  // labelText: "LOGIN",
+                                  labelStyle: TextStyle(
                                     color: Colors.amber.shade300,
-                                    fontFamily: 'Courier_new'),
-                                autocorrect: true,
-                                cursorColor: Colors.amber.shade300,
-                                //autofocus: true,
-                                textAlignVertical: TextAlignVertical.center,
-                                textAlign: TextAlign.left),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 15,
+                                  )),
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.amber.shade300,
+                                  fontFamily: 'Courier_new'),
+                              autocorrect: true,
+                              cursorColor: Colors.amber.shade300,
+                              //autofocus: true,
+                              textAlignVertical: TextAlignVertical.center,
+                              textAlign: TextAlign.left,
+                            ),
 
                             SizedBox(
                               height: size.height * .05,
                             ),
                             TextFormField(
+                                controller: SenhaControler,
 
                                 // onTap: () {
                                 // print('Clicou no textform field 1');
@@ -181,10 +192,10 @@ class _LoginPage extends State<Login> {
                                         // navegação entre telas.
 
                                         Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                        builder: (context) => Nome_cad()),
-                                        );
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Nome_cad(CadatroControler)));
                                       },
                                       child: Text("Cadastrar",
                                           textAlign: TextAlign.right,
@@ -203,26 +214,23 @@ class _LoginPage extends State<Login> {
                                 children: <Widget>[
                                   ElevatedButton(
                                       onPressed: () {
-                                        // if (_formKey.currentState!.validate()) {
-                                        // print(wMsg);
-                                        // ut.Message(context, wMsg, 'Titulo');
-
-                                        // Navigator.push(
-                                          // context,
-                                          // MaterialPageRoute(
-                                              // builder: (context) => Login()),
-                                        // );
-                                        // } else {
-                                        // nao pode entrar
-                                        // }
-                                        Timer(
-                                            Duration(seconds: 5),
-                                            () => Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Static(),
-                                                )));
+                                        dao
+                                            .getAllUsers()
+                                            .then((value) => print(value));
+                                        dao.ValidaLoginAmauri(
+                                                EmailControler.text,
+                                                SenhaControler.text)
+                                            .then(
+                                          (value) {
+                                            if (value) {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          Static()));
+                                            }
+                                          },
+                                        );
                                       },
                                       child: Text("ENTRAR",
                                           style: TextStyle(
